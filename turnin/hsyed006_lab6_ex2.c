@@ -16,7 +16,7 @@
 enum States {init, one, two, three, wait1,  wait2, wait3}  State;
 unsigned char tmp  =  0x00;
 void blinkGame(){
-	
+	tmp = ~tmp;
 	switch(State){
 		case init:
 			State = one;		
