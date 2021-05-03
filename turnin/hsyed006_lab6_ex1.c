@@ -72,7 +72,7 @@ int main(void) {
     
 	while (1) {
 		blink();
-		while(!TimerFlag)
+		while(!TimerFlag);
 		TimerFlag = 0;
     }
     return 1;
