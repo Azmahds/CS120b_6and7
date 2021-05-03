@@ -57,7 +57,6 @@ void blink(){
 		break;
 
 	}
-	PORTB = tmp;
 }
 
 
@@ -72,6 +71,7 @@ int main(void) {
     
 	while (1) {
 		blink();
+		PORTB = tmp;
 		while(!TimerFlag);
 		TimerFlag = 0;
     }
