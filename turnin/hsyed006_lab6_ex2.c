@@ -1,11 +1,13 @@
 /*	Author: hsyed006
  *  Partner(s) Name: none
  *	Lab Section:
- *	Assignment: Lab #  Exercise #
+ *	Assignment: Lab 6  Exercise 2
  *	Exercise Description: [optional - include for your own benefit]
  *
  *	I acknowledge all content contained herein, excluding template or example
  *	code, is my own original work.
+ *
+ *	Demo Link: https://drive.google.com/file/d/1n9QH34Af4tyPenQ9jKMm9LLVE48exEak/view?usp=sharing
  */
 #include <avr/io.h>
 #ifdef _SIMULATE_
