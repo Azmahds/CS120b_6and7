@@ -118,6 +118,7 @@ void blinkGame(){
 int main(void) {
     /* Insert DDR and PORT initializations */
 	DDRB = 0xFF; PORTB = 0x00;
+	DDRA = 0x00; PORTA = 0xFF;
     /* Insert your solution below */
 	TimerSet(300);
 	TimerOn();
