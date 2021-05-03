@@ -10,7 +10,7 @@
 #include <avr/io.h>
 #ifdef _SIMULATE_
 #include "simAVRHeader.h"
-#include "../header/timer.h"
+#include "timer.h"
 #endif
 
 enum States {init, one, two, three}  State;
