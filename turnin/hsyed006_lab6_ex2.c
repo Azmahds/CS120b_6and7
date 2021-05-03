@@ -41,7 +41,7 @@ void blinkGame(){
 		break;
 
 		case two:
-			if(hold = 0x01){
+			if(hold & 0x01){
                                 State  = two;
                         }
                         else{
