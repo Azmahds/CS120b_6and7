@@ -26,7 +26,7 @@ void blinkGame(){
 		break;
 	
 		case one:
-			if(hold == 0x01){
+			if(hold){
 				State  = wait1;
 			}
 			else{
@@ -35,14 +35,14 @@ void blinkGame(){
 		break;
 		
 		case wait1:
-			if(hold == 0x01){
+			if(hold){
 				State = one;
 			}
 			else{ State = wait1;}
 		break;
 
 		case two:
-			if(hold == 0x01){
+			if(hold){
                                 State  = two;
                         }
                         else{
@@ -51,14 +51,14 @@ void blinkGame(){
 		break;
 
                 case wait2:
-                        if(hold == 0x01){
+                        if(hold){
                                 State = two;
                         }
                         else{ State = wait2;}
                 break;
 
 		case three:
-			if(hold == 0x01){
+			if(hold){
                                 State  = three;
                         }
                         else{
@@ -68,7 +68,7 @@ void blinkGame(){
 		
 
                 case wait3:
-                        if(hold == 0x01){
+                        if(hold){
                                 State = one;
                         }
                         else{ State = wait3;}
