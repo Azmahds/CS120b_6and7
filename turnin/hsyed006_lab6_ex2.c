@@ -19,6 +19,7 @@ unsigned char hold = 0x00;
 void blinkGame(){
 	tmp = ~tmp;
 	hold = ~PINA;
+	hold = hold & 0x01;
 	switch(State){
 		case init:
 			State = one;		
