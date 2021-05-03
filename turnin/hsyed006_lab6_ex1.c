@@ -14,7 +14,7 @@
 #endif
 
 enum States {init, one, two, three}  State;
-//unsigned char tmp  =  0x00;
+unsigned char tmp  =  0x00;
 void blink(){
 	
 	switch(State){
@@ -45,18 +45,19 @@ void blink(){
 		break;
 	
 		case one:
-			PORTB = 0x01;
+			tmp = 0x01;
 		break;
 
 		case two:
-			PORTB = 0x02;
+			tmp = 0x02;
 		break;
 
 		case three:
-			PORTB = 0x04;
+			tmp = 0x04;
 		break;
 
 	}
+	PORTB = tmp;
 }
 
 
