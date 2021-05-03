@@ -43,7 +43,7 @@ void blinkGame(){
 
 		case two:
 			if(hold){
-                                State  = two;
+                                State  = wait2;
                         }
                         else{
 				State = three;
@@ -52,14 +52,14 @@ void blinkGame(){
 
                 case wait2:
                         if(hold){
-                                State = two;
+                                State = one;
                         }
-                        else{ State = wait2;}
+                        else{State = wait2;}
                 break;
 
 		case three:
 			if(hold){
-                                State  = three;
+                                State  = wait3;
                         }
                         else{
 				State = one;
