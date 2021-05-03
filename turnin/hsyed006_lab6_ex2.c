@@ -18,8 +18,8 @@ unsigned char tmp  =  0x00;
 unsigned char hold = 0x00;
 void blinkGame(){
 	tmp = ~tmp;
-	hold = ~PINA;
-	hold = hold & 0x01;
+	hold = ~PINA & 0x01;
+	//hold = hold & 0x01;
 	switch(State){
 		case init:
 			State = one;		
