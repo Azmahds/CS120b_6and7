@@ -16,7 +16,7 @@
 enum States {init, one, two, three}  State;
 unsigned char tmp  =  0x00;
 void blink(){
-	
+	tmp = ~tmp;
 	switch(State){
 		case init:
 			State = one;		
@@ -57,6 +57,7 @@ void blink(){
 		break;
 
 	}
+	PORTB = tmp;
 }
 
 
@@ -71,7 +72,6 @@ int main(void) {
     
 	while (1) {
 		blink();
-		PORTB = tmp;
 		while(!TimerFlag);
 		TimerFlag = 0;
     }
