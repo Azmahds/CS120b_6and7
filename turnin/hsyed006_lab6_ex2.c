@@ -15,15 +15,17 @@
 
 enum States {init, one, two, three, wait1,  wait2, wait3}  State;
 unsigned char tmp  =  0x00;
+unsigned char hold = 0x00;
 void blinkGame(){
 	tmp = ~tmp;
+	hold = ~PINA;
 	switch(State){
 		case init:
 			State = one;		
 		break;
 	
 		case one:
-			if(PORTA & 0x01){
+			if(hold & 0x01){
 				State  = wait1;
 			}
 			else{
@@ -32,14 +34,14 @@ void blinkGame(){
 		break;
 		
 		case wait1:
-			if(PORTA & 0x01){
+			if(hold & 0x01){
 				State = one;
 			}
 			else{ State = wait1;}
 		break;
 
 		case two:
-			if(PORTA & 0x01){
+			if(hold = 0x01){
                                 State  = two;
                         }
                         else{
@@ -48,14 +50,14 @@ void blinkGame(){
 		break;
 
                 case wait2:
-                        if(PORTA & 0x01){
+                        if(hold & 0x01){
                                 State = two;
                         }
                         else{ State = wait2;}
                 break;
 
 		case three:
-			if(PORTA & 0x01){
+			if(hold & 0x01){
                                 State  = three;
                         }
                         else{
@@ -65,7 +67,7 @@ void blinkGame(){
 		
 
                 case wait3:
-                        if(PORTA & 0x01){
+                        if(hold & 0x01){
                                 State = one;
                         }
                         else{ State = wait3;}
