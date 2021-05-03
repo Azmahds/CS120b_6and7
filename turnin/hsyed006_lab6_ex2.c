@@ -122,7 +122,7 @@ int main(void) {
     
 	while (1) {
 		blinkGame();
-		while(!TimerFlag)
+		while(!TimerFlag);
 		TimerFlag = 0;
     }
     return 1;
