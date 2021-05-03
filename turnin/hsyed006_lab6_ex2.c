@@ -94,15 +94,15 @@ void blinkGame(){
 			tmp = 0x04;
 		break;
 
-		case Wait1:
+		case wait1:
                         tmp = 0x01;
                 break;
 
-                case Wait2:
+                case wait2:
                         tmp = 0x02;
                 break;
 
-                case Wait3:
+                case wait3:
                         tmp = 0x04;
                 break;
 
