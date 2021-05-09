@@ -85,7 +85,7 @@ void tone(){
 
 	switch(state){
 		case init:
-			
+			set_PWM(0.0);
 		break;
 		
 		case off:
