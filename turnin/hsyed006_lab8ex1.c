@@ -85,7 +85,7 @@ void tone(){
 
 	switch(state){
 		case init:
-			PWM_off();
+			
 		break;
 		
 		case off:
@@ -93,18 +93,14 @@ void tone(){
 		break;
 
 		case toneC:
-			PWM_on();
 			set_PWM(261.63);
 		break;
 
 		case toneD:
-			PWM_on();
 			set_PWM(293.66);
-
 		break;
 
 		case toneE:
-			PWM_on();
 			set_PWM(329.63);
 
 		break;
