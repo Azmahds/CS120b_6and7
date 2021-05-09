@@ -118,10 +118,9 @@ int main(void) {
     /* Insert your solution below */
 	
 	state = init;
+	PWM_on();
 	while (1) {
-		PWM_on();
 		tone();
-		PWM_off();
 	}
     return 1;
 }
