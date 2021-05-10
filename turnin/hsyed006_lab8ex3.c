@@ -136,47 +136,38 @@ void tone(){
 
 	switch(state){
 		case init:
-			if(!(button & 0x01)){depressed = 0x00;}
 			set_PWM(0.0);
 		break;
 
 		case C4:
-			if(!(button & 0x01)){depressed = 0x00;}
 			set_PWM(261.63);
 		break;
 
 		case D:
-			if(!(button & 0x01)){depressed = 0x00;}
 			set_PWM(293.66);
 		break;
 
 		case E:
-			if(!(button & 0x01)){depressed = 0x00;}
 			set_PWM(329.63);
 		break;
 
 		case F:
-			if(!(button & 0x01)){depressed = 0x00;}
                         set_PWM(349.23);
                 break;
 
                 case G:
-			if(!(button & 0x01)){depressed = 0x00;}
                         set_PWM(392.00);
                 break;
 
                 case A:
-			if(!(button & 0x01)){depressed = 0x00;}
                         set_PWM(440.00);
                 break;
 
 		case B:
-			if(!(button & 0x01)){depressed = 0x00;}
                         set_PWM(493.88);
                 break;
 
                 case C5:
-			if(!(button & 0x01)){depressed = 0x00;}
                         set_PWM(523.25);
                 break;
 
@@ -199,6 +190,7 @@ int main(void) {
 	TimerOn();
 	while (1) {
 		button = ~PINA;
+		if(!(button & 0x01)){depressed = 0x00;}
 		tone();
 		while(!TimerFlag);
 		TimerFlag = 0;
