@@ -115,6 +115,9 @@ void theSitch(){
 			if(button & 0x01){state = on;}
                         else{state = waitOff;}
 		break;
+		default:
+			set_PWM(0);
+		break;
 	}
 	switch(start){
 		case off:
@@ -127,6 +130,9 @@ void theSitch(){
 		case waitOn:
 		break;	
 		case waitOff:
+		break;
+		default:
+			set_PWM(0);
 		break;
 	}
 
@@ -237,7 +243,7 @@ int main(void) {
     /* Insert your solution below */
 	
 	state = C4;
-	start = on;
+	//start = on;
 	PWM_on();
 	TimerSet(50);
 	TimerOn();
