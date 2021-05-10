@@ -101,7 +101,7 @@ void theSitch(){
 
 		case on:
 			if(button & 0x01){state = on;}
-                        else{state = WaitOn;}
+                        else{state = waitOn;}
 		break;
 		
 		case waitOn:
