@@ -142,7 +142,7 @@ void tone(){
 		case D:
 			if(!(button & 0x02) && !(button & 0x04)){trueornah = 0x01;}
 			if(button & 0x02 && trueornah == 0x01){trueornah = 0x00; state = E;}
-			else if(button & 0x04) && trueornah == 0x01{trueornah = 0x00; state = C4;}
+			else if(button & 0x04 && trueornah == 0x01){trueornah = 0x00; state = C4;}
 			else {state = D;}
 
 		break;
