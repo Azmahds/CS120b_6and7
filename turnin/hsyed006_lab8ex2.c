@@ -92,7 +92,6 @@ enum states {C4, D, E, F, G, A, B, C5} state;
 enum starts {off, on, waitOn, waitOff} start;
 unsigned char button = 0x00;
 unsigned char trueornah = 0x01;
-unsigned char onoroff = 0x01;
 
 void theSitch(){
 	switch(start){
@@ -115,21 +114,17 @@ void theSitch(){
 			if(button & 0x01){state = on;}
                         else{state = waitOff;}
 		break;
-		default:
-			set_PWM(0);
-		break;
 	}
 	switch(start){
 		case off:
                         set_PWM(0.0);
-			onoroff = 0x00;
                 break;
                 case on:
-			onoroff = 0x01;
                 break;		
 		case waitOn:
 		break;	
 		case waitOff:
+			set_PWM(0.0);
 		break;
 		default:
 			set_PWM(0);
@@ -243,14 +238,14 @@ int main(void) {
     /* Insert your solution below */
 	
 	state = C4;
-	//start = on;
+	start = on;
 	PWM_on();
 	TimerSet(50);
 	TimerOn();
 	while (1) {
 		button = ~PINA;
 		theSitch();
-		if(onoroff == 0x01){
+		if(start == on || start == waitOn){
 			tone();
 		}
 		while(!TimerFlag);
