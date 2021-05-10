@@ -225,12 +225,12 @@ int main(void) {
 	
 	state = C4;
 	start = waitOff;
-	PWM_on();
+	//PWM_on();
 	TimerSet(50);
 	TimerOn();
 	while (1) {
 		button = ~PINA;
-		//theSitch();
+		theSitch();
 		tone();
 		while(!TimerFlag);
 		TimerFlag = 0;
