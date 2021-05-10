@@ -119,14 +119,13 @@ void theSitch(){
 	}
 	switch(start){
 		case off:
-                        set_PWM(0.0);
+           
                 break;
                 case on:
                 break;		
 		case waitOn:
 		break;	
 		case waitOff:
-			set_PWM(0.0);
 		break;
 		default:
 			set_PWM(0);
@@ -246,8 +245,8 @@ int main(void) {
 	TimerOn();
 	while (1) {
 		button = ~PINA;
-		theSitch();
-		if(start == off || start == waitOff){}
+		//theSitch();
+		if(start == off || start == waitOff){set_PWM(0);}
 		else{tone();}
 		while(!TimerFlag);
 		TimerFlag = 0;
