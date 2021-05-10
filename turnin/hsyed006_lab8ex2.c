@@ -6,6 +6,8 @@
  *
  *	I acknowledge all content contained herein, excluding template or example
  *	code, is my own original work.
+ *
+ *	Demo Link: https://drive.google.com/file/d/1J9OSNMzf8Jfu5E7POZJbFgJUh1ImEELY/view?usp=sharing 
  */
 #include <avr/io.h>
 #ifdef _SIMULATE_
@@ -245,7 +247,7 @@ int main(void) {
 	TimerOn();
 	while (1) {
 		button = ~PINA;
-		//theSitch();
+		theSitch();
 		if(start == off || start == waitOff){}
 		else{tone();}
 		while(!TimerFlag);
