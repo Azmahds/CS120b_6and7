@@ -173,9 +173,10 @@ int main(void) {
 	
 	state = C4;
 	start = off;
+	PWM_on();
 	while (1) {
 		button = ~PINA;
-		theSitch();
+		//theSitch();
 		tone();
 	}
     return 1;
