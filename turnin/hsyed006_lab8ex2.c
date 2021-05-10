@@ -78,7 +78,7 @@ void tone(){
 	switch(state){
 		case C4:
 			if(button & 0x02){state = D;}
-			else {state = C;}
+			else {state = C4;}
 		break;
 
 		case D:
