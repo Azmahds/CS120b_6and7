@@ -51,13 +51,13 @@ enum states {init, off, toneC, toneD, toneE} state;
 unsigned char button = 0x00;
 
 void tone(){
-	button = ~PINA;
+	button = ~PINA & 0x07;
 
 	switch(state){
 		case init:
-			if(button & 0x01){state = toneC;}
-			else if(button & 0x02){state = toneD;}
-			else if (button & 0x04){state = toneE;}
+			if(button == 0x01){state = toneC;}
+			else if(button == 0x02){state = toneD;}
+			else if (button == 0x04){state = toneE;}
 			else{state = init;}
 		break;
 		
@@ -66,18 +66,18 @@ void tone(){
 		break;
 
 		case toneC:
-			if(!(button & 0x01)){state = init;}
+			if(!(button == 0x01)){state = init;}
 			else {state = toneC;}
 		break;
 
 		case toneD:
-			if(!(button & 0x02)){state = init;}
+			if(!(button == 0x02)){state = init;}
 			else {state = toneD;}
 
 		break;
 
 		case toneE:
-			if(!(button & 0x04)){state = init;}
+			if(!(button == 0x04)){state = init;}
 			else {state = toneE;}
 
 		break;
