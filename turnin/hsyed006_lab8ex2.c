@@ -226,7 +226,7 @@ int main(void) {
 	state = C4;
 	start = waitOff;
 	PWM_on();
-	TimerSet(500);
+	TimerSet(50);
 	TimerOn();
 	while (1) {
 		button = ~PINA;
