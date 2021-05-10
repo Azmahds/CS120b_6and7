@@ -92,7 +92,6 @@ enum states {C4, D, E, F, G, A, B, C5} state;
 enum starts {off, on, waitOn, waitOff} start;
 unsigned char button = 0x00;
 unsigned char trueornah = 0x01;
-unsigned char offtoon = 0x00;
 
 void theSitch(){
 	switch(start){
@@ -119,20 +118,18 @@ void theSitch(){
 	switch(start){
 		case off:
                         set_PWM(0.0);
-			offtoon = 0x00;
                 break;
 
                 case on:
-                        if(offtoon == 0x00){offtoon == 0x01; set_PWM(261.63);}
+                        set_PWM(261.63);
                 break;
 		
 		case waitOn:
-			if(offtoon == 0x00){offtoon == 0x01; set_PWM(261.63);}
+			
 		break;
 			
 		case waitOff:
 			set_PWM(0.0);
-			offtoon = 0x00;
 		break;
 	}
 
@@ -239,7 +236,6 @@ void tone(){
 int main(void) {
     /* Insert DDR and PORT initializations */
 	DDRB = 0x40; PORTB = 0x00;
-
 	DDRA = 0x00; PORTA = 0xFF;
     /* Insert your solution below */
 	
