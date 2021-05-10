@@ -92,26 +92,28 @@ enum states {C4, D, E, F, G, A, B, C5} state;
 enum starts {off, on, waitOn, waitOff} start;
 unsigned char button = 0x00;
 unsigned char trueornah = 0x01;
+unsigned char test = 0x00;
 
 void theSitch(){
+	test = button & 0x01;
 	switch(start){
 		case off:
-			if(button & 0x01){state = off;}
+			if(test == 0x01){state = off;}
 			else{state = waitOff;}	
 		break;
 
 		case on:
-			if(button & 0x01){state = on;}
+			if(test == 0x01){state = on;}
                         else{state = waitOn;}
 		break;
 		
 		case waitOn:
-			if(button & 0x01){state = off;}
+			if(test == 0x01){state = off;}
                         else{state = waitOn;}
 		break;
 		
 		case waitOff:
-			if(button & 0x01){state = on;}
+			if(test == 0x01){state = on;}
                         else{state = waitOff;}
 		break;
 	}
@@ -245,9 +247,8 @@ int main(void) {
 	while (1) {
 		button = ~PINA;
 		theSitch();
-		if(start == on || start == waitOn){
-			tone();
-		}
+		if(start == off || start == waitOff){}
+		else{tone();}
 		while(!TimerFlag);
 		TimerFlag = 0;
 	}
