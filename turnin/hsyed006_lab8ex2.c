@@ -11,6 +11,48 @@
 #ifdef _SIMULATE_
 #include "simAVRHeader.h"
 #endif
+#include <avr/interrupt.h>
+
+volatile unsigned char TimerFlag = 0;
+
+unsigned long _avr_timer_M = 1;
+unsigned long _avr_timer_cntcurr = 0;
+
+void TimerOn(){
+    TCCR1B = 0x0B;
+
+    OCR1A = 125;
+
+    TIMSK1 = 0X02;
+
+    TCNT1 = 0;
+
+    _avr_timer_cntcurr = _avr_timer_M;
+
+    SREG |= 0x80;
+}
+
+void TimerOff(){
+    TCCR1B = 0x00;
+}
+
+void TimerISR(){
+    TimerFlag = 1;
+}
+
+ISR(TIMER1_COMPA_vect){
+    _avr_timer_cntcurr--;
+    if(_avr_timer_cntcurr == 0){
+        TimerISR();
+        _avr_timer_cntcurr = _avr_timer_M;
+    }
+}
+
+void TimerSet(unsigned long M){
+    _avr_timer_M = M;
+    _avr_timer_cntcurr = _avr_timer_M;
+}
+
 
 void set_PWM(double frequency){
 	static double current_frequency;
@@ -47,19 +89,29 @@ void PWM_off(){
 
 
 enum states {C4, D, E, F, G, A, B, C5} state;
-enum starts {off, on} start;
+enum starts {off, on, waitOn, waitOff} start;
 unsigned char button = 0x00;
 
 void theSitch(){
 	switch(start){
 		case off:
-			if(button & 0x01){state = on;}
-			else{state = off;}	
+			if(button & 0x01){state = off;}
+			else{state = waitOff;}	
 		break;
 
 		case on:
+			if(button & 0x01){state = on;}
+                        else{state = WaitOn;}
+		break;
+		
+		case waitOn:
 			if(button & 0x01){state = off;}
-                        else{state = on;}
+                        else{state = waitOn;}
+		break;
+		
+		case waitOff:
+			if(button & 0x01){state = on;}
+                        else{state = waitOff;}
 		break;
 	}
 	switch(start){
@@ -172,12 +224,16 @@ int main(void) {
     /* Insert your solution below */
 	
 	state = C4;
-	start = off;
+	start = waitOff;
 	PWM_on();
+	TimerSet(500);
+	TimerOn();
 	while (1) {
 		button = ~PINA;
 		//theSitch();
 		tone();
+		while(!TimerFlag);
+		TimerFlag = 0;
 	}
     return 1;
 }
