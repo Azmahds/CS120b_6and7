@@ -240,7 +240,7 @@ int main(void) {
     /* Insert your solution below */
 	
 	state = C4;
-	start = waitOff;
+	start = on;
 	PWM_on();
 	TimerSet(50);
 	TimerOn();
