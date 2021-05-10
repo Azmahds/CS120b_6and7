@@ -119,15 +119,10 @@ void theSitch(){
 		case off:
                         set_PWM(0.0);
                 break;
-
                 case on:
-                        set_PWM(261.63);
-                break;
-		
+                break;		
 		case waitOn:
-			
-		break;
-			
+		break;	
 		case waitOff:
 			set_PWM(0.0);
 		break;
