@@ -112,7 +112,7 @@ void tone(){
 
 int main(void) {
     /* Insert DDR and PORT initializations */
-	DDRB = 0xFF; PORTB = 0x00;
+	DDRB = 0x40; PORTB = 0x00;
 
 	DDRA = 0x00; PORTA = 0xFF;
     /* Insert your solution below */
