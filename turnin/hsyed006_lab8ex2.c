@@ -88,10 +88,11 @@ void PWM_off(){
 }
 
 
-enum states {C4, wC4, D, wD, E, wE, F, wF, G, wG, A, wA, B, wB, C5, wC5} state;
+enum states {C4, D, E, F, G, A, B, C5} state;
 enum starts {off, on, waitOn, waitOff} start;
 unsigned char button = 0x00;
 unsigned char trueornah = 0x01;
+unsigned char offtoon = 0x00;
 
 void theSitch(){
 	switch(start){
@@ -117,12 +118,22 @@ void theSitch(){
 	}
 	switch(start){
 		case off:
-                        PWM_off();
+                        set_PWM(0.0);
+			offtoon = 0x00;
                 break;
 
                 case on:
-                        PWM_on();
+                        if(offtoon == 0x00){offtoon == 0x01; set_PWM(261.63);}
                 break;
+		
+		case waitOn:
+			if(offtoon == 0x00){offtoon == 0x01; set_PWM(261.63);}
+		break;
+			
+		case waitOff:
+			set_PWM(0.0);
+			offtoon = 0x00;
+		break;
 	}
 
 }
@@ -135,20 +146,12 @@ void tone(){
 			else {state = C4;}
 		break;
 
-		case wC4:
-			
-		break;
-			
 		case D:
 			if(!(button & 0x02) && !(button & 0x04)){trueornah = 0x01;}
 			if(button & 0x02 && trueornah == 0x01){trueornah = 0x00; state = E;}
 			else if(button & 0x04 && trueornah == 0x01){trueornah = 0x00; state = C4;}
 			else {state = D;}
 
-		break;
-
-		case wD:
-			
 		break;
 			
 		case E:
@@ -157,10 +160,6 @@ void tone(){
 			else if(button & 0x04 && trueornah == 0x01){trueornah = 0x00; state = D;}
 			else {state = E;}
 		break;
-		
-		case wE:
-			
-		break;
 			
 		case F:
 			if(!(button & 0x02) && !(button & 0x04)){trueornah = 0x01;}
@@ -168,20 +167,12 @@ void tone(){
                         else if(button & 0x04 && trueornah == 0x01){trueornah = 0x00; state = E;}
                         else {state = F;}
                 break;
-		
-		case wF:
-			
-		break;
 			
                 case G:
 			if(!(button & 0x02) && !(button & 0x04)){trueornah = 0x01;}
 			if(button & 0x02 && trueornah == 0x01){trueornah = 0x00; state = A;}
                         else if(button & 0x04 && trueornah == 0x01){trueornah = 0x00; state = F;}
                         else {state = G;}
-		break;
-
-		case wG:
-			
 		break;
 			
                 case A:
@@ -190,10 +181,6 @@ void tone(){
                         else if(button & 0x04 && trueornah == 0x01){trueornah = 0x00; state = G;}
                         else {state = A;}
                 break;
-
-		case wA:
-			
-		break;
 			
                 case B:
 			if(!(button & 0x02) && !(button & 0x04)){trueornah = 0x01;}
@@ -201,20 +188,12 @@ void tone(){
                         else if(button & 0x04 && trueornah == 0x01){trueornah = 0x00; state = A;}
                         else {state = B;}
                 break;
-
-		case wB:
-			
-		break;
 			
                 case C5:
 			if(!(button & 0x04)){trueornah = 0x01;}
                         if(button & 0x04 && trueornah == 0x01){trueornah = 0x00; state = B;}
                         else {state = C5;}
                 break;
-		
-		case wC5:
-			
-		break;
 	}	
 
 	switch(state){
@@ -271,7 +250,7 @@ int main(void) {
 	TimerOn();
 	while (1) {
 		button = ~PINA;
-		//theSitch();
+		theSitch();
 		tone();
 		while(!TimerFlag);
 		TimerFlag = 0;
